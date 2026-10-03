@@ -1,0 +1,33 @@
+name: Check
+
+# Validates the marketplace and each plugin as Claude Code reads them, and
+# checks that every tool a skill names is still served by the remote server.
+# The daily run catches a tool renamed on the server between changes here.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+      - name: Validate the marketplace and plugins
+        run: |
+          claude plugin validate --strict .
+          for p in plugins/*/; do claude plugin validate --strict "$p"; done
+      - name: Check tool names against the server card
+        run: python3 scripts/check_tools.py
