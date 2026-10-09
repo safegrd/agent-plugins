@@ -32,7 +32,7 @@ The key question is the user's to answer. Do not choose for them. Describe both 
 - **Customer-held:** only they can decrypt these backups. They keep a copy of the key file
   somewhere safe.
 
-Then check the host with `safegrd status` and `safegrd doctor`. The full guide is at
+Then check the host with `safegrd doctor`. The full guide is at
 https://safegrd.dev/docs/install.
 
 ## The local MCP server

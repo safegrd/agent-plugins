@@ -24,5 +24,5 @@ Report only what needs attention, worst first:
 Then one line for the rest ("12 other surfaces backed up and drilled on schedule").
 
 For each problem, name the next step. If it needs the host, give the command to run there
-(`safegrd status`, `safegrd doctor`, `safegrd backup --surface <id>`). If a drill would
+(`safegrd doctor`, `safegrd backup --surface <id>`). If a drill would
 answer the question, offer `request_drill`.
