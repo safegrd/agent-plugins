@@ -6,7 +6,7 @@ description: Report on SafeGrd backups across an organization, covering surfaces
 # Check SafeGrd backups
 
 1. Call `list_organizations`. For each organization the user cares about, call
-   `drill_stats` (pass rate, failed drills, surfaces never proven) and `storage_usage`
+   `get_drill_stats` (pass rate, failed drills, surfaces never proven) and `get_storage_usage`
    (hosted storage used against the quota).
 2. Call `list_surfaces`. Pass `next_cursor` back as `cursor` until it is absent, so no
    surface is missed.

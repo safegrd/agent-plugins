@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "safegrd": {
+      "type": "streamable-http",
+      "url": "https://safegrd.dev/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "dcr"
+            }
+          }
+        }
+      }
+    }
+  }
+}

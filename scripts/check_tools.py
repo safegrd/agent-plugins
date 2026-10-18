@@ -18,7 +18,7 @@ TOOL = re.compile(r"`((?:list|get|request)_[a-z_]+|drill_stats|storage_usage)`")
 
 root = pathlib.Path(__file__).resolve().parent.parent
 named = {}
-for skill in sorted(root.glob("plugins/*/skills/*/SKILL.md")):
+for skill in sorted(list(root.glob("plugins/*/skills/*/SKILL.md")) + list(root.glob("codex/*/skills/*/SKILL.md"))):
     for name in TOOL.findall(skill.read_text()):
         named.setdefault(name, []).append(str(skill.relative_to(root)))
 

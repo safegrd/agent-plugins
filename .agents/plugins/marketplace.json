@@ -1,0 +1,20 @@
+{
+  "name": "safegrd",
+  "interface": {
+    "displayName": "SafeGrd"
+  },
+  "plugins": [
+    {
+      "name": "safegrd",
+      "source": {
+        "source": "local",
+        "path": "./codex/safegrd"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer tools"
+    }
+  ]
+}

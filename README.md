@@ -14,6 +14,11 @@ restores it on a schedule to prove it works.
 
 The plugin asks for a personal access token. Create one in the SafeGrd console under
 **Tokens** (it starts with `sg_pat_`). To change it later, run `claude plugin configure safegrd`.
+Without the plugin, Claude Code signs in through the browser instead, with no token:
+
+```text
+claude mcp add --transport http safegrd https://safegrd.dev/mcp
+```
 
 With the token, Claude Code can read your organizations, projects, surfaces, snapshots and
 Fire Drills. It can also ask for a backup or a drill now. It cannot delete, disable, re-route
@@ -27,7 +32,7 @@ remote server's tools are listed at
 | :--- | :--- |
 | `backup-before-risky-change` | Before a migration, a schema change or a bulk delete, it takes a locked backup, runs a Fire Drill on it, and says whether it is safe to proceed |
 | `check-backups` | Reports late backups, failed drills, surfaces never restored, and hosted storage use |
-| `setup-safegrd` | Covers installing the CLI on a host, the local MCP server and the guard hook |
+| `setup-safegrd` | Takes a host from nothing to a verified backup: the CLI, signing in, enrolling, the first backup and its restore test, the local MCP server and the guard hook |
 
 ### On a host with the SafeGrd CLI
 
@@ -45,11 +50,20 @@ not in this plugin. The `setup-safegrd` skill adds it, and
 [safegrd.dev/docs/agents](https://safegrd.dev/docs/agents) has the recipe for Claude Code,
 Cursor and Codex.
 
+## Codex and ChatGPT
+
+`codex/safegrd` is the same plugin in the Agent Plugins format Codex and ChatGPT read:
+`plugin.json`, `mcp.json` and the three skills, with the hook recipe for Codex. It signs
+the user in to SafeGrd (OAuth, registered on first connection) instead of taking a token.
+Add this repository as a marketplace and install it with `/plugins`; the marketplace file
+is `.agents/plugins/marketplace.json`. The manifest follows OpenAI's plugin documentation
+and has not yet been validated against a Codex release.
+
 ## Checks
 
-`.github/workflows/check.yml` validates the marketplace and each plugin with
-`claude plugin validate --strict`. It also checks that every tool a skill names is served by
-the remote server, read from its public
+`.github/workflows/check.yml` validates the Claude Code marketplace and plugin with
+`claude plugin validate --strict`. It also checks that every tool a skill names, in either
+plugin, is served by the remote server, read from its public
 [server card](https://safegrd.dev/.well-known/mcp/server-card.json). The check runs on
 every change and daily.
 

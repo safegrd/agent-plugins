@@ -1,0 +1,38 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "safegrd",
+  "version": "0.1.0",
+  "description": "Check SafeGrd backups, take one before a risky change and prove it restores, and set a host up from nothing to a verified backup. No tool deletes, disables, re-routes or re-keys a backup.",
+  "author": {
+    "name": "SafeGrd",
+    "url": "https://safegrd.dev"
+  },
+  "homepage": "https://safegrd.dev/docs/mcp",
+  "repository": "https://github.com/safegrd/agent-plugins",
+  "license": "MIT",
+  "keywords": [
+    "backup",
+    "postgresql",
+    "mysql",
+    "mongodb",
+    "restore",
+    "object-lock",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/setup-safegrd/SKILL.md",
+      "interface": {
+        "displayName": "SafeGrd",
+        "shortDescription": "Database backups that prove they restore",
+        "longDescription": "SafeGrd backs up PostgreSQL, MySQL, MongoDB and SQLite databases, file trees and mailboxes, encrypted on your host and locked so nothing can delete a backup early, and restores each backup on a schedule to prove it works. From the chat: see which backups are late or failed, take a locked backup before a migration and prove it restores, and set a host up from nothing to a verified backup.",
+        "developerName": "SafeGrd",
+        "category": "Developer tools",
+        "websiteURL": "https://safegrd.dev",
+        "privacyPolicyURL": "https://safegrd.dev/privacy",
+        "termsOfServiceURL": "https://safegrd.dev/terms",
+        "defaultPrompt": "Are my database backups working, and when was the last one restored?"
+      }
+    }
+  }
+}
