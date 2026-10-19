@@ -7,7 +7,7 @@ description: Set up SafeGrd for a database, from nothing to a verified backup. C
 
 You can take the user from nothing to a backup that has been restored and checked, on the
 host you are running on. Four things are the user's own, and you ask for them instead of
-doing them: signing in, choosing who holds the encryption key, paying, and adding a
+doing them: signing in, choosing how the encryption key is managed, paying, and adding a
 database that SafeGrd backs up from its own machines. Everything else you run yourself.
 
 ## The remote server
@@ -53,7 +53,7 @@ Signing in is the user's step. Two ways, and you drive both:
   the user, tell them to open the link on any device and check that the page shows the same
   code, and wait for the command to finish. Then `safegrd enroll`.
 
-Before `enroll`, ask who holds the encryption key. Do not choose for them, and do not
+Before `enroll`, ask how the encryption key should be managed. Do not choose for them, and do not
 describe either as the weaker choice:
 
 - **SafeGrd-managed key** (the default): SafeGrd keeps the key sealed and releases it only
