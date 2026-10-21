@@ -27,7 +27,7 @@
         "shortDescription": "Backups proven to restore",
         "longDescription": "SafeGrd backs up PostgreSQL, MySQL, MongoDB and SQLite databases, file trees and mailboxes, encrypted on your host and locked so nothing can delete a backup early, and restores each backup on a schedule to prove it works. From the chat: see which backups are late or failed, take a locked backup before a migration and prove it restores, and set a host up from nothing to a verified backup.",
         "developerName": "SafeGrd",
-        "category": "Developer tools",
+        "category": "Developer Tools",
         "websiteURL": "https://safegrd.dev",
         "privacyPolicyURL": "https://safegrd.dev/privacy",
         "termsOfServiceURL": "https://safegrd.dev/terms",
