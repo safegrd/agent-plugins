@@ -1,6 +1,6 @@
 ---
 name: setup-safegrd
-description: Set up SafeGrd for a database, from nothing to a verified backup. Covers signing in, installing the SafeGrd CLI on a host, enrolling the host, the first backup and its restore test, the local MCP server, and the guard hook that takes a locked backup before a destructive command runs. Use when the user wants to start protecting a database with SafeGrd, or wants backups taken automatically before an agent runs a destructive command.
+description: Set up SafeGrd for a database, from nothing to a verified backup. Covers signing in, installing the SafeGrd CLI on a host, enrolling the host, the first backup and its restore test, and the local MCP server. Use when the user wants to start protecting a database with SafeGrd. Also adds the experimental guard hook, which takes a locked backup before an agent runs a destructive command, but only when the user asks for it.
 ---
 
 # Set up SafeGrd
@@ -10,11 +10,10 @@ host you are running on. Four things are the user's own, and you ask for them in
 doing them: signing in, choosing how the encryption key is managed, paying, and adding a
 database that SafeGrd backs up from its own machines. Everything else you run yourself.
 
-Three steps leave something running or configured after this session: the daemon's
-service (step 5), the local MCP server in Claude Code's MCP config, and the guard hook in the project's
-`.claude/settings.json`. Before each one, tell the user what it writes and where, and go ahead only when
-they say yes. `safegrd daemon uninstall` removes the service; the other two are one entry
-to delete.
+Two steps leave something running or configured after this session: the daemon's service
+(step 5) and the local MCP server in Claude Code's MCP config. Before each one, tell the user what
+it writes and where, and go ahead only when they say yes. `safegrd daemon uninstall` removes
+the service; the MCP server is one entry to delete.
 
 ## The remote server
 
@@ -113,7 +112,11 @@ config and key. A restore writes only into a new or empty target. Add it with:
 claude mcp add safegrd-local -- safegrd mcp
 ```
 
-## The guard hook
+## The guard hook (experimental)
+
+Add the hook only when the user asks for it by name or asks for
+backups before destructive commands. Do not offer it or add it as part of setup. It goes in
+the project's `.claude/settings.json`; say so and wait for a yes before writing it.
 
 With the hook, Claude Code takes a locked snapshot before any command that can destroy
 data (`DROP`, `TRUNCATE`, `DELETE` without `WHERE`, `dropdb`, `terraform destroy`,

@@ -32,7 +32,7 @@ remote server's tools are listed at
 | :--- | :--- |
 | `backup-before-risky-change` | Before a migration, a schema change or a bulk delete, it takes a locked backup, runs a Fire Drill on it, and says whether it is safe to proceed |
 | `check-backups` | Reports late backups, failed drills, surfaces never restored, and hosted storage use |
-| `setup-safegrd` | Takes a host from nothing to a verified backup: the CLI, signing in, enrolling, the first backup and its restore test, the local MCP server and the guard hook |
+| `setup-safegrd` | Takes a host from nothing to a verified backup: the CLI, signing in, enrolling, the first backup and its restore test, and the local MCP server, plus the experimental guard hook when you ask for it |
 
 ### On a host with the SafeGrd CLI
 
@@ -43,10 +43,10 @@ writes only into a new or empty target.
 claude mcp add safegrd-local -- safegrd mcp
 ```
 
-The guard hook takes a locked snapshot before a command that can destroy data, such as
+The guard hook is experimental. It takes a locked snapshot before a command that can destroy data, such as
 `DROP TABLE` or `prisma migrate reset`, and blocks the command if the snapshot fails. It
 names the surface a project works on, so it goes in that project's `.claude/settings.json`,
-not in this plugin. The `setup-safegrd` skill adds it, and
+not in this plugin. The `setup-safegrd` skill adds it only when you ask, and
 [safegrd.dev/docs/agents](https://safegrd.dev/docs/agents) has the recipe for Claude Code,
 Cursor and Codex.
 
