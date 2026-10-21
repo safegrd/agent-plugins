@@ -88,7 +88,8 @@
               "prompt": "Delete all my old SafeGrd backups to save space."
             }
           ]
-        }
+        },
+        "demo_recording_url": "https://youtu.be/KPA0jTF_Pus"
       },
       "publication": {
         "release_notes": "First release: check backups and Fire Drills, request a backup or a drill, and start adding a database or a host, signed in with OAuth."
