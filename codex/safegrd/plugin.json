@@ -24,14 +24,74 @@
       "onboardingSkill": "./skills/setup-safegrd/SKILL.md",
       "interface": {
         "displayName": "SafeGrd",
-        "shortDescription": "Database backups that prove they restore",
+        "shortDescription": "Backups proven to restore",
         "longDescription": "SafeGrd backs up PostgreSQL, MySQL, MongoDB and SQLite databases, file trees and mailboxes, encrypted on your host and locked so nothing can delete a backup early, and restores each backup on a schedule to prove it works. From the chat: see which backups are late or failed, take a locked backup before a migration and prove it restores, and set a host up from nothing to a verified backup.",
         "developerName": "SafeGrd",
         "category": "Developer tools",
         "websiteURL": "https://safegrd.dev",
         "privacyPolicyURL": "https://safegrd.dev/privacy",
         "termsOfServiceURL": "https://safegrd.dev/terms",
-        "defaultPrompt": "Are my database backups working, and when was the last one restored?"
+        "defaultPrompt": [
+          "Are my database backups working, and when was the last one restored?",
+          "I'm about to run a migration on production. Take a backup first and prove it restores.",
+          "Which of my backups are late or failing?"
+        ],
+        "supportURL": "https://safegrd.dev/contact",
+        "logo": "./assets/logo.png",
+        "composerIcon": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Check backup health across an organization",
+              "prompt": "Are my SafeGrd backups healthy?",
+              "tools_triggered": "list_organizations, list_surfaces",
+              "expected_behavior": "Lists each surface with its last backup and last Fire Drill, and names any that are late or failed."
+            },
+            {
+              "description": "Read the latest snapshot of one surface",
+              "prompt": "When was restore-proof last backed up, and how big was it?",
+              "tools_triggered": "list_surfaces, list_snapshots",
+              "expected_behavior": "Names the newest snapshot of the restore-proof surface with its time, size and lock date."
+            },
+            {
+              "description": "Read restore evidence",
+              "prompt": "Has the latest backup of restore-proof been restored and checked?",
+              "tools_triggered": "list_surfaces, list_drills",
+              "expected_behavior": "Reports the most recent Fire Drill for the surface: when it ran, whether it passed, and what it checked."
+            },
+            {
+              "description": "Back up before a risky change",
+              "prompt": "I'm about to drop a column on restore-proof. Back it up first.",
+              "tools_triggered": "list_surfaces, request_backup",
+              "expected_behavior": "Requests a backup of the surface and says it is queued, or relays the server's reason it cannot run yet (for example the plan's backup cadence)."
+            },
+            {
+              "description": "Start protecting a new database",
+              "prompt": "I want to back up my Supabase database with SafeGrd.",
+              "tools_triggered": "list_organizations, add_surface",
+              "expected_behavior": "Returns the SafeGrd console link where the person signs in to Supabase and finishes adding the surface. Nothing is created until they do."
+            }
+          ],
+          "negative": [
+            {
+              "description": "General database question with no SafeGrd data needed",
+              "prompt": "How do I write a SQL query that joins two tables?"
+            },
+            {
+              "description": "Backups of something SafeGrd does not handle",
+              "prompt": "How do I back up the photos on my iPhone?"
+            },
+            {
+              "description": "Asking to delete backups, which no tool can do",
+              "prompt": "Delete all my old SafeGrd backups to save space."
+            }
+          ]
+        }
+      },
+      "publication": {
+        "release_notes": "First release: check backups and Fire Drills, request a backup or a drill, and start adding a database or a host, signed in with OAuth."
       }
     }
   }
