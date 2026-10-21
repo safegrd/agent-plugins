@@ -70,7 +70,7 @@
             {
               "description": "Start protecting a new database",
               "prompt": "I want to back up my Supabase database with SafeGrd.",
-              "tools_triggered": "list_organizations, add_surface",
+              "tools_triggered": "list_organizations, get_surface_setup",
               "expected_behavior": "Returns the SafeGrd console link where the person signs in to Supabase and finishes adding the surface. Nothing is created until they do."
             }
           ],
