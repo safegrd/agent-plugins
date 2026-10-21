@@ -10,6 +10,12 @@ host you are running on. Four things are the user's own, and you ask for them in
 doing them: signing in, choosing how the encryption key is managed, paying, and adding a
 database that SafeGrd backs up from its own machines. Everything else you run yourself.
 
+Three steps leave something running or configured after this session: the daemon's
+service (step 5), the local MCP server in `~/.codex/config.toml`, and the guard hook in the project's
+`.codex/hooks.json`. Before each one, tell the user what it writes and where, and go ahead only when
+they say yes. `safegrd daemon uninstall` removes the service; the other two are one entry
+to delete.
+
 ## The remote server
 
 This plugin connects to `https://safegrd.dev/mcp` by signing the user in: Codex opens
