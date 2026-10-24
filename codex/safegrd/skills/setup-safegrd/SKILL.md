@@ -6,9 +6,9 @@ description: Set up SafeGrd for a database, from nothing to a verified backup. C
 # Set up SafeGrd
 
 You can take the user from nothing to a backup that has been restored and checked, on the
-host you are running on. Four things are the user's own, and you ask for them instead of
-doing them: signing in, choosing how the encryption key is managed, paying, and adding a
-database that SafeGrd backs up from its own machines. Everything else you run yourself.
+host you are running on. Five things are the user's own, and you ask for them instead of
+doing them: installing the CLI, signing in, choosing how the encryption key is managed,
+paying, and adding a database that SafeGrd backs up from its own machines. Everything else you run yourself.
 
 Two steps leave something running or configured after this session: the daemon's service
 (step 5) and the local MCP server in `~/.codex/config.toml`. Before each one, tell the user what
@@ -35,15 +35,11 @@ first backup with `list_snapshots` and continue from step 6.
 
 ## 2. Install the CLI
 
-Run the installer. In your shell it has no terminal, so it installs the binary and stops
-without asking anything:
-
-```sh
-curl -fsSL https://safegrd.dev/install.sh | sh
-```
-
-It puts `safegrd` in `/usr/local/bin` with sudo, or in `~/.local/bin` without. If the
-command is not found afterwards, add `~/.local/bin` to `PATH` for the rest of the session.
+Installing the CLI is the user's step: you do not download or run an installer. Check
+for it with `safegrd version`. If it is not found, ask the user to install it on this host
+following https://safegrd.dev/docs/install (Homebrew: `brew install safegrd/tap/safegrd`)
+and tell you when it is done. Then check again. If it is installed in `~/.local/bin` and
+not found, add `~/.local/bin` to `PATH` for the rest of the session.
 
 ## 3. Sign in and enroll the host
 
