@@ -2,10 +2,7 @@
   "mcpServers": {
     "safegrd": {
       "type": "http",
-      "url": "https://safegrd.dev/mcp",
-      "headers": {
-        "Authorization": "Bearer ${user_config.safegrd_token}"
-      }
+      "url": "https://safegrd.dev/mcp"
     }
   }
 }

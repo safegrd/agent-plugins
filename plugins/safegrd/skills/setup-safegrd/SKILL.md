@@ -17,13 +17,11 @@ the service; the MCP server is one entry to delete.
 
 ## The remote server
 
-This plugin connects to `https://safegrd.dev/mcp` with the personal access token entered
-when the plugin was installed. If a SafeGrd tool answers `401`, the token is missing,
-expired or revoked. Ask the user to create one in the console under Tokens and set it with
-`claude plugin configure safegrd`. Never ask them to paste it into the chat.
-
-Without the plugin, `claude mcp add --transport http safegrd https://safegrd.dev/mcp` with
-no header signs in through the browser instead, and needs no token.
+This plugin connects to `https://safegrd.dev/mcp` and signs the user in through the
+browser. If the SafeGrd tools are missing or a tool answers `401`, the user has not signed
+in yet, or the sign-in was revoked or expired. Ask them to run `/mcp`, choose the safegrd
+server, choose Authenticate and approve the connection in SafeGrd. Never ask them for a
+token in the chat.
 
 ## 1. Find out what there is
 
@@ -52,7 +50,7 @@ command is not found afterwards, add `~/.local/bin` to `PATH` for the rest of th
 
 Signing in is the user's step. Two ways, and you drive both:
 
-- **A token the user already made** (the one this plugin holds, or one in `SAFEGRD_TOKEN`):
+- **A token the user already made** (in `SAFEGRD_TOKEN`, from Tokens in the console):
   `safegrd enroll --token env:SAFEGRD_TOKEN`. Nothing to approve.
 - **The browser:** run `safegrd login --no-browser`. It prints a link and a code. Give both to
   the user, tell them to open the link on any device and check that the page shows the same

@@ -12,17 +12,14 @@ restores it on a schedule to prove it works.
 /plugin install safegrd@safegrd
 ```
 
-The plugin asks for a personal access token. Create one in the SafeGrd console under
-**Tokens** (it starts with `sg_pat_`). To change it later, run `claude plugin configure safegrd`.
-Without the plugin, Claude Code signs in through the browser instead, with no token:
+Then run `/mcp`, choose the safegrd server and **Authenticate**. Your browser opens SafeGrd:
+sign in, pick the organization Claude Code may reach, and approve. There is no token to
+create or paste. The connection is listed under **Tokens** in the console, named after the
+client, and you can revoke it there.
 
-```text
-claude mcp add --transport http safegrd https://safegrd.dev/mcp
-```
-
-With the token, Claude Code can read your organizations, projects, surfaces, snapshots and
+Once signed in, Claude Code can read your organizations, projects, surfaces, snapshots and
 Fire Drills. It can also ask for a backup or a drill now. It cannot delete, disable, re-route
-or re-key a backup: the server refuses those to a personal access token on every route. The
+or re-key a backup: the server refuses those to an agent on every route. The
 remote server's tools are listed at
 [safegrd.dev/docs/mcp](https://safegrd.dev/docs/mcp).
 
@@ -53,8 +50,8 @@ Cursor and Codex.
 ## Codex and ChatGPT
 
 `codex/safegrd` is the same plugin in the Agent Plugins format Codex and ChatGPT read:
-`plugin.json`, `mcp.json` and the three skills, with the hook recipe for Codex. It signs
-the user in to SafeGrd (OAuth, registered on first connection) instead of taking a token.
+`plugin.json`, `mcp.json` and the three skills, with the hook recipe for Codex. Like the
+Claude Code plugin, it signs the user in to SafeGrd (OAuth, registered on first connection).
 Add this repository as a marketplace and install it with `/plugins`; the marketplace file
 is `.agents/plugins/marketplace.json`. The manifest follows OpenAI's plugin documentation
 and has not yet been validated against a Codex release.
